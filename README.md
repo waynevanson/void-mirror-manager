@@ -9,4 +9,8 @@ Remove the learning curve and hassle for users when swicthing to a mirror closer
 
 It should default to tier 1 mirrors, and allow users to select from tier 2 mirrors.
 
-It should query the packages available and create a diff of versions between all.
+It should query the packages available and create a diff of versions between all mirrors.
+
+When a mirror is ammended, it should be updated using `xbps -S`. A flag to prevent this behaviour will be available.
+
+Check which mirrors hold certain files. for example, many repos will not query for debug files.
