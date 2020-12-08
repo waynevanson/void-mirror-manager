@@ -1,2 +1,12 @@
 # void-mirror-manager
 Manage mirrors for xbps
+
+## Purpose
+
+Remove the learning curve and hassle for users when swicthing to a mirror closer to home.
+
+## Todo
+
+It should default to tier 1 mirrors, and allow users to select from tier 2 mirrors.
+
+It should query the packages available and create a diff of versions between all.
