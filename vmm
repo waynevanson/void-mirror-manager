@@ -1,2 +1,118 @@
 #! /bin/bash
+set -e
 
+TIER_1_GB="
+    https://alpha.de.repo.voidlinux.org
+    https://mirrors.servercentral.com/voidlinux
+    https://alpha.us.repo.voidlinux.org
+    https://mirror.clarkson.edu/voidlinux
+"
+
+TIER_2_GB="
+    https://mirror.ps.kz/voidlinux
+    https://mirrors.bfsu.edu.cn/voidlinux
+    https://mirrors.cnnic.cn/voidlinux
+    https://mirrors.tuna.tsinghua.edu.cn/voidlinux
+    https://mirror.maakpain.kro.kr/void
+    https://void.webconverger.org
+    https://mirror.aarnet.edu.au/pub/voidlinux
+    https://ftp.swin.edu.au/voidlinux
+    https://void.cijber.net
+    http://ftp.dk.xemacs.org/voidlinux
+    https://mirrors.dotsrc.org/voidlinux
+    https://quantum-mirror.hu/mirrors/pub/voidlinux
+    http://ftp.debian.ru/mirrors/voidlinux
+    https://mirror.yandex.ru/mirrors/voidlinux
+    https://cdimage.debian.org/mirror/voidlinux
+    https://ftp.acc.umu.se/mirror/voidlinux
+    https://ftp.lysator.liu.se/pub/voidlinux
+    https://ftp.sunet.se/mirror/voidlinux
+"
+
+TIER_2_CHINA="https://mirrors.hushan.tech:44300/voidlinux"
+
+GB_MIRROR="$TIER_1_GB $TIER_2_GB"
+TIER_2_ALL="$TIER_2_GB $TIER_2_CHINA"
+
+# curl, nslookup via bind-utils, jq for JSON Handling
+
+sync=true
+
+# mirror stats:
+# architectures, repos,
+# https://www.tutorialspoint.com/how-to-find-linux-server-geographic-location-in-terminal
+
+diff() {}
+
+add_mirror() {}
+
+_replace_mirrors() {
+    mkdir -p /etc/xbps.d
+    cp /usr/share/xbps.d/*-repository-*.conf /etc/xbps.d/
+    sed -i 's|https://alpha.de.repo.voidlinux.org|<repository>|g' /etc/xbps.d/*-repository-*.conf
+}
+
+remove_mirror() {}
+replace_mirror() {}
+list_mirror_details() {}
+
+sync() {
+    $sync && xbps-install -S
+}
+
+# remove `https://` from start and `/*`` from end.
+# https://stackoverflow.com/questions/2497215/how-to-extract-domain-name-from-url
+url_to_host() {
+    echo "$1" | cut -d'/' -f3
+}
+
+host_to_ip() {
+    # look up, handle if error
+    nslookup "$1" | grep ?????? || echo "Could not lookup ip" && exit 1
+    #
+}
+
+# leaving blank gets the client's details
+ip_info() {
+    curl https://ipinfo.io/"$1"
+}
+
+ip_info_to_latitude() {
+    echo "$1" | jq '.data.latitude'
+}
+
+ip_info_to_longitude() {
+    echo "$1" | jq '.data.longitude'
+}
+
+# ax, ay, Array<bx, by>
+# find the closes match in a list
+# array.sortBy(eq,eq).get first
+compare_long_lat() {
+
+}
+
+ip_info_to_coords() {
+
+}
+
+get_location_client() {}
+
+get_location_repository() {}
+
+closest() {
+    # get latlong client, get latlong global
+    # compare for closest match
+    client_ip_info=$(ip_info)
+
+}
+
+# vmm pick
+# vmm closest
+# vmm list|ls
+# vmm list|ls current
+# vmm
+# vmm
+# vmm
+# vmm
+# vmm
